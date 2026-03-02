@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlyxoHD – Play Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #04080f;
+    --surface: #080d14;
+    --surface2: #0d1520;
+    --accent: #0091EA;
+    --accent2: #40C4FF;
+    --cyan: #82D8FF;
+    --text: #f0f0f8;
+    --muted: #6080a0;
+    --border: rgba(0,145,234,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(6,6,8,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .logo span { color: var(--muted); -webkit-text-fill-color: var(--muted); }
+
+  nav ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  nav a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  .nav-cta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.65rem 1.5rem;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: #007acc; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,145,234,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -60%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -60%) scale(1.1); opacity: 0.7; }
+  }
+
+  .hero-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    padding: 0.35rem 1rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+    animation: fadeDown 0.8s ease forwards;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 15vw, 12rem);
+    letter-spacing: 6px;
+    line-height: 0.9;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 60%, var(--accent2) 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin: 1.5rem auto 2.5rem;
+    line-height: 1.7;
+    font-weight: 400;
+    animation: fadeUp 1s ease 0.4s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .btn-primary {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(0,145,234,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(0,145,234,0.5); }
+
+  .btn-outline {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* ─── PLAYER MOCKUP ─── */
+  .player-demo {
+    margin: 5rem auto 0;
+    max-width: 900px;
+    width: 90%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 60px rgba(0,145,234,0.1);
+    animation: fadeUp 1s ease 0.8s both;
+    position: relative;
+  }
+
+  .player-screen {
+    background: #000;
+    aspect-ratio: 16/9;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .player-screen-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #04080f 0%, #061020 50%, #081830 100%);
+  }
+
+  .player-title-overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+
+  .play-btn-demo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(0,145,234,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 40px rgba(0,145,234,0.5);
+    position: relative;
+    z-index: 2;
+    animation: popIn 1s ease 1.2s both;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .play-btn-demo svg { margin-left: 5px; }
+
+  /* gesture hints floating */
+  .gesture-hint {
+    position: absolute;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    animation: floatHint 3s ease-in-out infinite;
+  }
+
+  .gh-left { left: 12%; top: 40%; background: rgba(130,216,255,0.15); color: var(--cyan); border: 1px solid rgba(130,216,255,0.3); animation-delay: 0s; }
+  .gh-right { right: 12%; top: 40%; background: rgba(64,196,255,0.15); color: var(--accent2); border: 1px solid rgba(64,196,255,0.3); animation-delay: 1s; }
+  .gh-top { top: 15%; right: 5%; background: rgba(0,145,234,0.15); color: var(--accent); border: 1px solid rgba(0,145,234,0.3); font-size: 0.55rem; animation-delay: 0.5s; }
+
+  @keyframes floatHint {
+    0%, 100% { transform: translateY(0); opacity: 0.8; }
+    50% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  .player-controls {
+    background: var(--surface2);
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .progress-fill {
+    width: 38%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    right: -5px; top: 50%;
+    transform: translateY(-50%);
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .ctrl-icon { width: 18px; height: 18px; fill: var(--muted); cursor: pointer; transition: fill 0.2s; }
+  .ctrl-icon:hover { fill: var(--text); }
+  .ctrl-play { fill: var(--accent) !important; }
+
+  .time-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ─── FORMAT STRIP ─── */
+  .formats {
+    padding: 3rem 2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .formats-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .format-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
+  .tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    padding: 0.4rem 1.1rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,145,234,0.05); }
+  .tag.hot { border-color: rgba(0,145,234,0.4); color: var(--text); }
+
+  /* ─── FEATURES GRID ─── */
+  .section {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5px;
+    margin-top: 4rem;
+    background: var(--border);
+  }
+
+  .feature-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .feature-card:hover { background: var(--surface2); }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .feature-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .feature-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    background: rgba(0,145,234,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,145,234,0.2);
+  }
+
+  /* ─── GESTURE SECTION ─── */
+  .gesture-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 6rem 3rem;
+  }
+
+  .gesture-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .gesture-phone {
+    width: 240px;
+    margin: 0 auto;
+    background: #111;
+    border: 2px solid #2a2a3a;
+    border-radius: 30px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(0,145,234,0.1);
+    position: relative;
+  }
+
+  .phone-screen {
+    background: #000;
+    border-radius: 12px;
+    aspect-ratio: 9/16;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-screen-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #04080f 0%, #081425 100%);
+  }
+
+  .gesture-overlay {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .go-left { left: 10%; background: rgba(130,216,255,0.2); animation: gestureFlash 3s ease infinite; }
+  .go-right { right: 10%; background: rgba(64,196,255,0.2); animation: gestureFlash 3s ease 1.5s infinite; }
+
+  @keyframes gestureFlash {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.3); opacity: 1; }
+  }
+
+  .gesture-list { list-style: none; }
+  .gesture-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .gesture-item:last-child { border-bottom: none; }
+
+  .gi-icon {
+    font-size: 1.5rem;
+    min-width: 2.5rem;
+    text-align: center;
+  }
+
+  .gi-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .gi-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ─── GIF SECTION ─── */
+  .gif-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .gif-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .gif-card-header {
+    background: var(--surface2);
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #0091EA; }
+  .dot-y { background: #40C4FF; }
+  .dot-g { background: #82D8FF; }
+
+  .gif-preview {
+    background: #000;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gif-preview-bg {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      #0a0a0a 0px, #0a0a0a 10px,
+      #111 10px, #111 20px
+    );
+    opacity: 0.5;
+  }
+
+  .gif-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.8);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .gif-label span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  .gif-converting {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .blink { animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* ─── STATS ─── */
+  .stats-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .stat {
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    padding: 8rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(0,145,234,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-section p {
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .platform-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .platform-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid var(--border);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: var(--muted);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .platform-badge:hover { border-color: var(--accent); color: var(--text); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .section { padding: 4rem 1.5rem; }
+    .gesture-inner, .gif-section { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat:nth-child(2n) { border-bottom: none; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Plyxo<span>HD</span></div>
+  <ul>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#gestures">Gestures</a></li>
+    <li><a href="#formats">Formats</a></li>
+    <li><a href="#gif">GIF Convert</a></li>
+  </ul>
+  <button class="nav-cta">Download Free</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">✦ The Ultimate Video Player</div>
+  <h1>PLYXO<br>HD</h1>
+  <p class="hero-sub">Play every format. Control with a touch. The most powerful video player built for Android — with gesture control, GIF conversion, PiP, and more.</p>
+  <div class="hero-actions">
+    <button class="btn-primary">Get PlyxoHD Free →</button>
+    <button class="btn-outline">Watch Demo</button>
+  </div>
+
+  <!-- Player Mockup -->
+  <div class="player-demo">
+    <div class="player-screen">
+      <div class="player-screen-bg"></div>
+      <div class="player-title-overlay">PlyxoHD · Now Playing · sample_video.mkv</div>
+      <div class="gesture-hint gh-left">« Rewind 10s</div>
+      <div class="gesture-hint gh-right">Forward 10s »</div>
+      <div class="gesture-hint gh-top">🔍 Pinch Zoom</div>
+      <div class="play-btn-demo">
+        <svg width="22" height="26" viewBox="0 0 22 26" fill="white">
+          <path d="M0 0L22 13L0 26V0Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="player-controls">
+      <!-- skip back -->
+      <svg class="ctrl-icon" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm.5 6 8.5 6V6z"/></svg>
+      <!-- play -->
+      <svg class="ctrl-icon ctrl-play" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M8 5v14l11-7z"/></svg>
+      <!-- skip fwd -->
+      <svg class="ctrl-icon" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zm2-8.14 5.5 3.14L8 16.14V9.86zM16 6h2v12h-2z"/></svg>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <span class="time-label">38:14 / 1:42:00</span>
+      <!-- volume -->
+      <svg class="ctrl-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12z"/></svg>
+      <!-- pip -->
+      <svg class="ctrl-icon" viewBox="0 0 24 24"><path d="M19 7H9c-1.1 0-2 .9-2 2v6h2V9h10v12H9v-2H7v2c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM11 15v4l4-4h-4zM5 11H3v10h10v-2H5V11z"/></svg>
+      <!-- fullscreen -->
+      <svg class="ctrl-icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT STRIP -->
+<div class="formats" id="formats">
+  <p class="formats-label">✦ Supported Video Formats</p>
+  <div class="format-tags">
+    <div class="tag hot">MP4</div>
+    <div class="tag hot">MKV</div>
+    <div class="tag hot">AVI</div>
+    <div class="tag hot">MOV</div>
+    <div class="tag hot">3GP</div>
+    <div class="tag hot">FLV</div>
+    <div class="tag">WEBM</div>
+    <div class="tag">WMV</div>
+    <div class="tag">MPG</div>
+    <div class="tag">TS</div>
+    <div class="tag">VOB</div>
+    <div class="tag">M4V</div>
+    <div class="tag">RMVB</div>
+    <div class="tag">H.265</div>
+    <div class="tag">H.264</div>
+    <div class="tag">HDR</div>
+    <div class="tag">4K</div>
+    <div class="tag">8K</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Video Formats</div></div>
+  <div class="stat"><div class="stat-num">8K</div><div class="stat-label">Max Resolution</div></div>
+  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Unique Features</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Ads. Ever.</div></div>
+</div>
+
+<!-- FEATURES GRID -->
+<section class="section" id="features">
+  <p class="section-eyebrow">✦ Built Different</p>
+  <h2 class="section-title">Every Feature<br>You'll Ever Need</h2>
+  <p class="section-desc">PlyxoHD is engineered from the ground up to give you total control over your video experience.</p>
+
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <span class="feature-icon">👆</span>
+      <div class="feature-name">Swipe Seek</div>
+      <div class="feature-desc">Slide your finger left or right anywhere on screen to seek through the timeline with frame-perfect precision. Speed adapts to your swipe velocity.</div>
+      <span class="feature-tag">Gesture Control</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">⏪</span>
+      <div class="feature-name">Double-Tap Rewind & Forward</div>
+      <div class="feature-desc">Double-tap the left side to rewind 10 seconds, right side to skip forward. Tap multiple times in quick succession to jump further. Fully customizable skip duration.</div>
+      <span class="feature-tag">Gesture Control</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔍</span>
+      <div class="feature-name">Long-Press Zoom</div>
+      <div class="feature-desc">Long press and drag to zoom into any region of the video without interrupting playback. Perfect for action footage, sports, or reading small text on screen.</div>
+      <span class="feature-tag">Smart Zoom</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📸</span>
+      <div class="feature-name">Frame Screenshot</div>
+      <div class="feature-desc">Capture any single frame as a full-resolution image instantly. Saved in original video resolution — no compression, no quality loss. Shake to save.</div>
+      <span class="feature-tag">Capture</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🎞️</span>
+      <div class="feature-name">Video → GIF Converter</div>
+      <div class="feature-desc">Select a clip range, adjust frame rate and resolution, and export any segment of your video as a high-quality animated GIF or WEBP — right inside the app.</div>
+      <span class="feature-tag">Converter</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">▶</span>
+      <div class="feature-name">Background Playback</div>
+      <div class="feature-desc">Lock your screen or switch apps — PlyxoHD keeps playing. Audio and video continue in the background with lockscreen media controls fully integrated.</div>
+      <span class="feature-tag">Background Mode</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">⧉</span>
+      <div class="feature-name">Picture-in-Picture (PiP)</div>
+      <div class="feature-desc">Pop your video into a floating window and continue watching while using other apps. Resize, drag, and pin the PiP window anywhere on screen.</div>
+      <span class="feature-tag">Multitask</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔆</span>
+      <div class="feature-name">Brightness & Volume Swipe</div>
+      <div class="feature-desc">Swipe up/down on the left edge to control brightness, right edge for volume. Smooth, responsive, and faster than reaching for device buttons.</div>
+      <span class="feature-tag">Gesture Control</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🎨</span>
+      <div class="feature-name">Video Colour Tuning</div>
+      <div class="feature-desc">Adjust brightness, contrast, saturation, hue, and sharpness with real-time preview. Save custom presets and apply them instantly to any video.</div>
+      <span class="feature-tag">Enhancement</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔊</span>
+      <div class="feature-name">Equalizer & Audio Boost</div>
+      <div class="feature-desc">10-band EQ, surround sound simulation, bass boost, and volume amplification up to 200%. Supports multi-channel audio including Dolby and DTS tracks.</div>
+      <span class="feature-tag">Audio</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📝</span>
+      <div class="feature-name">Subtitle Support</div>
+      <div class="feature-desc">Auto-loads embedded subtitles from MKV and MP4 containers. Load external SRT, ASS, VTT, and SUB files. Full styling control: font, size, color, offset.</div>
+      <span class="feature-tag">Accessibility</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-name">Hardware Acceleration</div>
+      <div class="feature-desc">Leverages GPU decoding for buttery-smooth playback of 4K and 8K content. Lower battery drain, no frame drops, zero lag — even on older devices.</div>
+      <span class="feature-tag">Performance</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔁</span>
+      <div class="feature-name">Playback Speed Control</div>
+      <div class="feature-desc">Speed from 0.25x to 4x with pitch correction so audio stays natural at any rate. Long-press the play button to instantly enter 2x speed mode.</div>
+      <span class="feature-tag">Playback</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🌐</span>
+      <div class="feature-name">Network Stream & DLNA</div>
+      <div class="feature-desc">Stream video directly from URLs, local network shares, NAS drives, and DLNA/UPnP servers. Supports HTTP, HTTPS, RTSP, and MMS protocols.</div>
+      <span class="feature-tag">Streaming</span>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🪄</span>
+      <div class="feature-name">Aspect Ratio & Crop</div>
+      <div class="feature-desc">Switch between 16:9, 4:3, fullscreen stretch, and custom crop modes. Perfect for fitting 21:9 cinema content to your screen without black bars.</div>
+      <span class="feature-tag">Display</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- GESTURE SECTION -->
+<section class="gesture-section" id="gestures">
+  <div class="gesture-inner">
+    <div>
+      <p class="section-eyebrow">✦ Touch Controls</p>
+      <h2 class="section-title">Gestures That<br>Just Work</h2>
+      <p class="section-desc" style="margin-bottom:2.5rem">PlyxoHD maps all essential controls to natural touch gestures so you never have to hunt for a button.</p>
+
+      <ul class="gesture-list">
+        <li class="gesture-item">
+          <div class="gi-icon">👈</div>
+          <div>
+            <div class="gi-title">Double-Tap Left</div>
+            <div class="gi-desc">Rewind 10 seconds. Tap repeatedly to keep rewinding. Duration is customizable from 5–30 seconds.</div>
+          </div>
+        </li>
+        <li class="gesture-item">
+          <div class="gi-icon">👉</div>
+          <div>
+            <div class="gi-title">Double-Tap Right</div>
+            <div class="gi-desc">Skip forward 10 seconds. Perfect for skipping intros and ads without lifting your eyes from the screen.</div>
+          </div>
+        </li>
+        <li class="gesture-item">
+          <div class="gi-icon">↔️</div>
+          <div>
+            <div class="gi-title">Horizontal Swipe</div>
+            <div class="gi-desc">Drag left or right anywhere to seek. The further from center, the faster the seek speed.</div>
+          </div>
+        </li>
+        <li class="gesture-item">
+          <div class="gi-icon">☝️</div>
+          <div>
+            <div class="gi-title">Vertical Swipe Left / Right</div>
+            <div class="gi-desc">Left side controls screen brightness. Right side controls media volume. Smooth, instant, accurate.</div>
+          </div>
+        </li>
+        <li class="gesture-item">
+          <div class="gi-icon">🤏</div>
+          <div>
+            <div class="gi-title">Pinch to Zoom</div>
+            <div class="gi-desc">Pinch open to zoom into the video. Pinch closed to zoom back out. Pan while zoomed to see any part of the frame.</div>
+          </div>
+        </li>
+        <li class="gesture-item">
+          <div class="gi-icon">✊</div>
+          <div>
+            <div class="gi-title">Long Press</div>
+            <div class="gi-desc">Long press screen to activate 2× speed mode — release to return to normal. Or zoom into a region by long pressing and dragging.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div style="display:flex; justify-content:center;">
+      <div class="gesture-phone">
+        <div class="phone-screen">
+          <div class="phone-screen-bg"></div>
+          <div class="gesture-overlay go-left">⏪</div>
+          <div class="gesture-overlay go-right">⏩</div>
+          <div style="position:relative;z-index:2;text-align:center;">
+            <div style="font-family:'Bebas Neue';font-size:2rem;letter-spacing:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">PLYXOHD</div>
+            <div style="font-family:'Space Mono';font-size:0.55rem;color:var(--muted);letter-spacing:2px;margin-top:0.3rem;">SWIPE · TAP · GESTURE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIF SECTION -->
+<section id="gif">
+  <div class="gif-section">
+    <div>
+      <p class="section-eyebrow">✦ Exclusive Feature</p>
+      <h2 class="section-title">Video to GIF<br>In Seconds</h2>
+      <p class="section-desc" style="margin-bottom:1.5rem">Mark a start and end point in any video, choose your frame rate, resolution, and quality — PlyxoHD renders a crisp, shareable animated GIF or WEBP instantly. No upload required. Fully offline.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.8rem;margin-top:1rem">
+        <li style="display:flex;gap:0.8rem;font-size:0.85rem;color:var(--muted);align-items:center"><span style="color:var(--accent)">✓</span> Select any clip range with precision trimmer</li>
+        <li style="display:flex;gap:0.8rem;font-size:0.85rem;color:var(--muted);align-items:center"><span style="color:var(--accent)">✓</span> Choose GIF or WEBP output format</li>
+        <li style="display:flex;gap:0.8rem;font-size:0.85rem;color:var(--muted);align-items:center"><span style="color:var(--accent)">✓</span> Control frame rate (6fps – 30fps)</li>
+        <li style="display:flex;gap:0.8rem;font-size:0.85rem;color:var(--muted);align-items:center"><span style="color:var(--accent)">✓</span> Adjust output resolution & file size</li>
+        <li style="display:flex;gap:0.8rem;font-size:0.85rem;color:var(--muted);align-items:center"><span style="color:var(--accent)">✓</span> Add text overlays before exporting</li>
+        <li style="display:flex;gap:0.8rem;font-size:0.85rem;color:var(--muted);align-items:center"><span style="color:var(--accent)">✓</span> Share directly to apps or save to gallery</li>
+      </ul>
+    </div>
+
+    <div class="gif-card">
+      <div class="gif-card-header">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span style="font-family:'Space Mono';font-size:0.65rem;color:var(--muted);margin-left:0.5rem;">PlyxoHD · GIF Export</span>
+      </div>
+      <div class="gif-preview">
+        <div class="gif-preview-bg"></div>
+        <div style="position:relative;z-index:2;text-align:center;padding:1rem">
+          <div style="font-size:3rem;margin-bottom:0.5rem">🎞️</div>
+          <div style="font-family:'Bebas Neue';font-size:1.5rem;letter-spacing:3px;color:var(--text)">CONVERTING...</div>
+        </div>
+        <div class="gif-label">
+          <span>clip_00842.mkv → output.gif</span>
+          <div class="gif-converting"><span class="blink">●</span> 74% rendered</div>
+        </div>
+      </div>
+      <div style="padding:1.2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;border-top:1px solid var(--border)">
+        <div style="text-align:center">
+          <div style="font-family:'Bebas Neue';font-size:1.3rem;color:var(--accent)">24fps</div>
+          <div style="font-family:'Space Mono';font-size:0.55rem;color:var(--muted);letter-spacing:1px">FRAME RATE</div>
+        </div>
+        <div style="text-align:center;border-left:1px solid var(--border);border-right:1px solid var(--border)">
+          <div style="font-family:'Bebas Neue';font-size:1.3rem;color:var(--accent2)">720P</div>
+          <div style="font-family:'Space Mono';font-size:0.55rem;color:var(--muted);letter-spacing:1px">RESOLUTION</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'Bebas Neue';font-size:1.3rem;color:var(--cyan)">4.2s</div>
+          <div style="font-family:'Space Mono';font-size:0.55rem;color:var(--muted);letter-spacing:1px">CLIP LENGTH</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <h2>Download<br>PlyxoHD<br>Free</h2>
+  <p>Zero ads. Zero subscriptions. Full power. Exclusively available for Android.</p>
+  <button class="btn-primary" style="font-size:0.85rem;padding:1.2rem 3rem;">Get PlyxoHD on Android →</button>
+
+  <div class="platform-badges">
+    <div class="platform-badge" style="border-color:rgba(0,145,234,0.4);color:var(--text);padding:1rem 2.5rem;gap:1rem;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#0091EA"><path d="M3.18 23.76c.3.16.64.19.96.09l11.29-6.52-2.43-2.44-9.82 8.87zM.48 1.22C.18 1.55 0 2.06 0 2.73v18.54c0 .67.18 1.18.49 1.5l.08.08 10.39-10.39v-.24L.56 1.14l-.08.08zM20.54 10.35L17.1 8.38l-2.71 2.7 2.71 2.7 3.46-2c.99-.57.99-1.49 0-2.43zm-17.36 13.4 11.29-6.51-2.43-2.43-8.86 8.94z"/></svg>
+      <div style="text-align:left">
+        <div style="font-size:0.6rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.15rem">Available on</div>
+        <div style="font-family:'Bebas Neue';font-size:1.3rem;letter-spacing:2px;">Google Play</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-family:'Space Mono';font-size:0.65rem;color:var(--muted);letter-spacing:2px;margin-top:1.5rem;text-transform:uppercase;">Android 8.0 and above · Free</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PlyxoHD</div>
+  <ul class="footer-links">
+    <li><a href="/privacy.html">Privacy</a></li>
+    <li><a href="/terms.html">Terms</a></li>
+  
+  </ul>
+  <p class="footer-copy">© 2026 PlyxoHD. All rights reserved. Play Everything.</p>
+</footer>
+
+</body>
+</html>

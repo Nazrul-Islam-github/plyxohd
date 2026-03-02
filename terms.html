@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlyxoHD – Terms & Conditions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #0C0D10;
+      --surface:    #13151A;
+      --surface2:   #1A1D25;
+      --border:     #252830;
+      --border2:    #2E3240;
+      --accent:     #4F8EF7;
+      --accent2:    #7BB8FF;
+      --accent-glow:rgba(79,142,247,0.15);
+      --gold:       #E8B84B;
+      --text:       #E8EAF0;
+      --text-muted: #7A8099;
+      --text-dim:   #4A5068;
+      --red:        #F74F5A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── Background texture ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(79,142,247,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(232,184,75,0.05) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Layout ─── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    /* ─── Header ─── */
+    header {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), #2B5FD9);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(79,142,247,0.35);
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg { width: 26px; height: 26px; fill: #fff; }
+
+    .logo-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-name span { color: var(--accent); }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+
+    .header-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 6vw, 58px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent2);
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .meta-item {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-item strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .meta-dot { color: var(--border2); }
+
+    /* ─── Alert box ─── */
+    .alert {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 56px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .alert strong { color: var(--text); font-weight: 500; }
+
+    /* ─── TOC ─── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 64px;
+    }
+
+    .toc-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 8px 32px;
+    }
+
+    .toc a {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      transition: color 0.2s;
+      padding: 4px 0;
+    }
+
+    .toc a:hover { color: var(--accent2); }
+
+    .toc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    /* ─── Section ─── */
+    .section {
+      margin-bottom: 64px;
+      scroll-margin-top: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(79,142,247,0.25);
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-top: 6px;
+      flex-shrink: 0;
+      letter-spacing: 0.05em;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: 0.02em;
+      margin: 28px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    p {
+      font-size: 15px;
+      color: #A8B0C8;
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ─── Divider ─── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 0 64px;
+    }
+
+    /* ─── Lists ─── */
+    ul, ol {
+      margin: 12px 0 20px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    ul li, ol li {
+      position: relative;
+      padding: 7px 0 7px 28px;
+      font-size: 15px;
+      color: #A8B0C8;
+      font-weight: 300;
+      border-bottom: 1px solid var(--border);
+    }
+
+    ul li:last-child, ol li:last-child { border-bottom: none; }
+
+    ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 13px;
+      top: 8px;
+    }
+
+    ol { counter-reset: item; }
+    ol li { counter-increment: item; }
+    ol li::before {
+      content: counter(item, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      top: 10px;
+    }
+
+    /* ─── Callout ─── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .callout.warn {
+      border-left: 3px solid var(--gold);
+      background: rgba(232,184,75,0.04);
+    }
+
+    .callout.danger {
+      border-left: 3px solid var(--red);
+      background: rgba(247,79,90,0.04);
+    }
+
+    .callout-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .callout.warn .callout-label { color: var(--gold); }
+    .callout.danger .callout-label { color: var(--red); }
+
+    .callout strong { color: var(--text); font-weight: 500; }
+
+    /* ─── Table ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    thead th {
+      background: var(--surface2);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+
+    tbody td {
+      padding: 13px 18px;
+      color: #A8B0C8;
+      vertical-align: top;
+      font-weight: 300;
+    }
+
+    tbody td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── Contact card ─── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .contact-value {
+      font-size: 14px;
+      color: var(--accent2);
+      font-weight: 400;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .footer-left strong { color: var(--text-muted); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent2); }
+
+    /* ─── Scroll progress ─── */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      z-index: 100;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ─── Animate in ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header    { animation: fadeUp 0.7s ease both; }
+    .alert    { animation: fadeUp 0.7s 0.1s ease both; }
+    .toc      { animation: fadeUp 0.7s 0.15s ease both; }
+    .section  { animation: fadeUp 0.5s ease both; }
+
+    @media (max-width: 600px) {
+      .wrapper { padding: 0 16px 80px; }
+      header { padding: 48px 0 40px; }
+      .contact-card { padding: 20px; }
+      .toc { padding: 20px; }
+      h1 { letter-spacing: -0.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div class="wrapper">
+
+  <!-- ─── HEADER ─── -->
+  <header>
+  <div class="logo-row">
+      
+       <img style="width: 100px" src="/asset/ic_launcher_foreground.webp" alt="logo">
+      <span class="logo-name">Plyx<span>o</span>HD</span>
+    </div>
+
+    <div class="header-badge">Legal Document · Terms &amp; Conditions</div>
+
+    <h1>Terms &amp; <em>Conditions</em></h1>
+
+    <div class="header-meta">
+      <span class="meta-item">Effective <strong>February 27, 2025</strong></span>
+      <span class="meta-dot">·</span>
+      <span class="meta-item">Last Updated <strong>February 27, 2025</strong></span>
+      <span class="meta-dot">·</span>
+      <span class="meta-item">Platform <strong>Android</strong></span>
+    </div>
+  </header>
+
+  <!-- ─── ALERT ─── -->
+  <div class="alert">
+    <strong>Please read carefully before using PlyxoHD.</strong> By downloading, installing, or using this application, you agree to be legally bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use the app.
+  </div>
+
+  <!-- ─── TABLE OF CONTENTS ─── -->
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <div class="toc-grid">
+      <a href="#s1"><span class="toc-num">01</span> Acceptance of Terms</a>
+      <a href="#s2"><span class="toc-num">02</span> Description of Service</a>
+      <a href="#s3"><span class="toc-num">03</span> Eligibility</a>
+      <a href="#s4"><span class="toc-num">04</span> License Grant</a>
+      <a href="#s5"><span class="toc-num">05</span> Prohibited Uses</a>
+      <a href="#s6"><span class="toc-num">06</span> Advertising (AdMob)</a>
+      <a href="#s7"><span class="toc-num">07</span> Crash Reporting (Crashlytics)</a>
+      <a href="#s8"><span class="toc-num">08</span> Intellectual Property</a>
+      <a href="#s9"><span class="toc-num">09</span> User Content</a>
+      <a href="#s10"><span class="toc-num">10</span> Disclaimer of Warranties</a>
+      <a href="#s11"><span class="toc-num">11</span> Limitation of Liability</a>
+      <a href="#s12"><span class="toc-num">12</span> Indemnification</a>
+      <a href="#s13"><span class="toc-num">13</span> Termination</a>
+      <a href="#s14"><span class="toc-num">14</span> Governing Law</a>
+      <a href="#s15"><span class="toc-num">15</span> Changes to Terms</a>
+      <a href="#s16"><span class="toc-num">16</span> Contact Us</a>
+    </div>
+  </div>
+
+  <!-- ─── SECTIONS ─── -->
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Acceptance of Terms</h2>
+    </div>
+    <p>These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User", "you", or "your") and the developers of PlyxoHD ("we", "us", or "our") governing your use of the PlyxoHD Android application ("App" or "Service").</p>
+    <p>By accessing or using the App in any way — including downloading it, installing it, launching it, or playing any media through it — you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy, which is incorporated herein by reference.</p>
+    <div class="callout warn">
+      <span class="callout-label">⚠ Important</span>
+      If you are using the App on behalf of an organization, you represent that you have authority to bind that organization to these Terms.
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Description of Service</h2>
+    </div>
+    <p>PlyxoHD is a free-to-use Android video player application that provides users with media playback capabilities. The App includes the following features and integrations:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Video Playback</td><td>Play local video files in common formats (MP4, MKV, AVI, MOV, etc.)</td></tr>
+          <tr><td>HD / 4K Support</td><td>Hardware-accelerated playback for high-resolution content</td></tr>
+          <tr><td>Subtitle Support</td><td>Load and display SRT, SSA, and embedded subtitle tracks</td></tr>
+          <tr><td>Gesture Controls</td><td>Swipe-based brightness, volume, and seek controls</td></tr>
+          <tr><td>Google AdMob</td><td>Advertisement delivery to support free access</td></tr>
+          <tr><td>Firebase Crashlytics</td><td>Crash and stability reporting</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>We reserve the right to modify, suspend, or discontinue any feature or the entire Service at any time without notice.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Eligibility</h2>
+    </div>
+    <p>You must be at least <strong>13 years of age</strong> to use PlyxoHD. If you are under 18, you represent that you have obtained consent from a parent or legal guardian to use the App.</p>
+    <p>By using the App, you represent and warrant that:</p>
+    <ul>
+      <li>You are at least 13 years of age</li>
+      <li>You have the legal capacity to enter into these Terms</li>
+      <li>Your use of the App complies with all applicable laws in your jurisdiction</li>
+      <li>You are not prohibited from using the App under any law of the country in which you are resident or from which you access the App</li>
+    </ul>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>License Grant</h2>
+    </div>
+    <p>Subject to your compliance with these Terms, we grant you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to:</p>
+    <ul>
+      <li>Download and install the App on Android devices you own or control</li>
+      <li>Use the App solely for your personal, non-commercial purposes</li>
+    </ul>
+
+    <h3>Restrictions</h3>
+    <p>This license does not permit you to:</p>
+    <ul>
+      <li>Copy, modify, distribute, sell, or lease any part of the App</li>
+      <li>Reverse engineer, decompile, disassemble, or attempt to extract the source code of the App</li>
+      <li>Remove, alter, or obscure any proprietary notices on the App</li>
+      <li>Use the App to build a competing product or service</li>
+      <li>Transfer, sublicense, or assign your rights under this license to any third party</li>
+    </ul>
+
+    <div class="callout">
+      <strong>No Implied License:</strong> Nothing in these Terms grants you any rights in or to the App except as expressly set forth herein.
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Prohibited Uses</h2>
+    </div>
+    <p>You agree not to use PlyxoHD in any manner that:</p>
+    <ul>
+      <li>Violates any applicable local, national, or international law or regulation</li>
+      <li>Infringes upon the intellectual property rights of any third party, including playing or distributing pirated, unlicensed, or copyright-protected content</li>
+      <li>Circumvents, disables, or interferes with security features of the App</li>
+      <li>Introduces malware, viruses, trojan horses, or other malicious code into the App or any connected system</li>
+      <li>Attempts to gain unauthorized access to any part of the App or its backend systems</li>
+      <li>Engages in any data mining, scraping, or similar data collection or extraction activities</li>
+      <li>Interferes with or disrupts the integrity or performance of the App</li>
+      <li>Harasses, abuses, or harms any person</li>
+    </ul>
+
+    <div class="callout danger">
+      <span class="callout-label">⛔ Strictly Prohibited</span>
+      Using PlyxoHD to play, stream, or distribute pirated, illegally obtained, or copyright-infringing content is a violation of these Terms and may subject you to civil and criminal liability under applicable copyright law, including the DMCA.
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Advertising — Google AdMob</h2>
+    </div>
+    <p>PlyxoHD is provided free of charge and is supported by advertising delivered through <strong>Google AdMob</strong>. By using the App, you acknowledge and agree to the following:</p>
+    <ul>
+      <li>Advertisements may be displayed within the App, including banner ads, interstitial ads, and rewarded ads</li>
+      <li>Google AdMob may collect your Advertising ID, device information, and usage data to serve personalized or non-personalized advertisements</li>
+      <li>Ad content is controlled by Google and its advertising partners; we are not responsible for the content of advertisements served</li>
+      <li>We do not endorse any products or services advertised through AdMob</li>
+      <li>You may opt out of personalized advertising at any time through your Android device settings</li>
+    </ul>
+
+    <h3>Ad Interaction</h3>
+    <p>You agree not to click on advertisements fraudulently or artificially inflate ad impressions or click-through rates. Such activity is a violation of Google's Terms of Service and may result in termination of your access to the App.</p>
+
+    <p>AdMob's use of your data is governed by <strong>Google's Privacy Policy</strong>: <em>https://policies.google.com/privacy</em></p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Crash Reporting — Firebase Crashlytics</h2>
+    </div>
+    <p>We use <strong>Google Firebase Crashlytics</strong> to collect crash reports and app diagnostics to improve App stability. By using PlyxoHD, you agree that:</p>
+    <ul>
+      <li>Crashlytics may automatically collect crash logs, stack traces, device model, OS version, and app state at the time of a crash</li>
+      <li>This data is transmitted to Google's servers for analysis</li>
+      <li>Crashlytics data is used solely for debugging and improving App performance</li>
+      <li>Crashlytics does not collect personally identifiable information unless explicitly logged by the app</li>
+    </ul>
+    <p>Firebase's data practices are governed by <strong>Google's Privacy Policy</strong>: <em>https://firebase.google.com/support/privacy</em></p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Intellectual Property</h2>
+    </div>
+    <p>The App, including its design, logo, name "PlyxoHD", source code, user interface, graphics, and all other content created by us, is owned by or licensed to us and is protected by copyright, trademark, and other intellectual property laws.</p>
+
+    <h3>Our Rights</h3>
+    <ul>
+      <li>All rights, title, and interest in and to the App remain exclusively with us</li>
+      <li>The PlyxoHD name and logo are our exclusive property</li>
+      <li>You may not use our trademarks or branding without our prior written consent</li>
+    </ul>
+
+    <h3>Your Content</h3>
+    <p>PlyxoHD plays video files stored locally on your device. We do not claim any ownership over the media files you play through the App. You are solely responsible for ensuring you have the right to play any content through PlyxoHD.</p>
+
+    <h3>DMCA Compliance</h3>
+    <p>We respect the intellectual property rights of others. If you believe that any content accessible through PlyxoHD infringes your copyright, please contact us at <strong>legal@plyxohd.com</strong> with a detailed DMCA takedown notice.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>User Content &amp; Responsibilities</h2>
+    </div>
+    <p>PlyxoHD is a local video player. It does not enable you to upload, stream, or share video content with others through our platform. You are solely and exclusively responsible for:</p>
+    <ul>
+      <li>The content you choose to play using the App</li>
+      <li>Ensuring you own or have a valid license to play any media files</li>
+      <li>Compliance with copyright and licensing laws applicable to your content</li>
+      <li>Any consequences arising from your use of unlicensed or copyright-infringing media</li>
+    </ul>
+    <p>We expressly disclaim all liability arising from content played through the App that infringes upon the rights of third parties.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>Disclaimer of Warranties</h2>
+    </div>
+    <div class="callout warn">
+      <span class="callout-label">Legal Notice</span>
+      THE APP IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+    </div>
+    <p>To the fullest extent permitted by applicable law, we expressly disclaim all warranties, including but not limited to:</p>
+    <ul>
+      <li>Implied warranties of merchantability, fitness for a particular purpose, and non-infringement</li>
+      <li>Any warranty that the App will be uninterrupted, error-free, or free of viruses or other harmful components</li>
+      <li>Any warranty regarding the accuracy, reliability, or completeness of any content</li>
+      <li>Any warranty that defects in the App will be corrected</li>
+    </ul>
+    <p>You acknowledge that your use of the App is at your sole risk. Some jurisdictions do not allow the disclaimer of implied warranties, so some of the above may not apply to you.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 11 -->
+  <div class="section" id="s11">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>Limitation of Liability</h2>
+    </div>
+    <div class="callout danger">
+      <span class="callout-label">Legal Notice</span>
+      TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL WE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.
+    </div>
+    <p>This includes, but is not limited to:</p>
+    <ul>
+      <li>Loss of profits, data, revenue, goodwill, or business opportunities</li>
+      <li>Corruption or loss of media files stored on your device</li>
+      <li>Damages arising from unauthorized access to or alteration of your data</li>
+      <li>Damages arising from use of or inability to use the App</li>
+      <li>Damages arising from content played through the App</li>
+    </ul>
+    <p>Our total cumulative liability to you for all claims arising out of or relating to these Terms or the App shall not exceed <strong>USD $10 (ten US dollars)</strong>.</p>
+    <p>Some jurisdictions do not allow the limitation or exclusion of liability for incidental or consequential damages, so the above may not apply to you.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 12 -->
+  <div class="section" id="s12">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>Indemnification</h2>
+    </div>
+    <p>You agree to indemnify, defend, and hold harmless PlyxoHD, its developers, affiliates, officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable legal fees) arising out of or in connection with:</p>
+    <ul>
+      <li>Your use of or inability to use the App</li>
+      <li>Your violation of these Terms</li>
+      <li>Your violation of any third-party rights, including intellectual property rights</li>
+      <li>Any media content you play through the App that infringes on third-party rights</li>
+      <li>Your violation of any applicable law or regulation</li>
+    </ul>
+    <p>We reserve the right, at our own expense, to assume the exclusive defense and control of any matter subject to indemnification by you.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 13 -->
+  <div class="section" id="s13">
+    <div class="section-header">
+      <span class="section-num">13</span>
+      <h2>Termination</h2>
+    </div>
+    <p>These Terms remain in effect until terminated. We may terminate or suspend your access to the App immediately, without prior notice or liability, for any reason, including if you breach these Terms.</p>
+    <p>Upon termination:</p>
+    <ul>
+      <li>The license granted to you under Section 4 will immediately cease</li>
+      <li>You must stop all use of the App and delete all copies from your devices</li>
+      <li>Provisions that by their nature should survive termination shall survive, including ownership provisions, warranty disclaimers, indemnity, and limitations of liability</li>
+    </ul>
+    <p>You may terminate these Terms at any time by uninstalling the App from all your devices.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 14 -->
+  <div class="section" id="s14">
+    <div class="section-header">
+      <span class="section-num">14</span>
+      <h2>Governing Law &amp; Dispute Resolution</h2>
+    </div>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which the developer is domiciled, without regard to its conflict of law provisions.</p>
+
+    <h3>Informal Resolution</h3>
+    <p>Before initiating any formal legal action, you agree to contact us at <strong>legal@plyxohd.com</strong> and attempt to resolve any dispute informally. We will try to resolve the issue within 30 days of receiving your notice.</p>
+
+    <h3>Arbitration</h3>
+    <p>If informal resolution fails, any dispute, claim, or controversy arising out of or relating to these Terms or the App shall be resolved by binding arbitration, except that either party may seek equitable relief in court for infringement of intellectual property rights.</p>
+
+    <h3>Class Action Waiver</h3>
+    <p>To the extent permitted by law, you agree that any dispute resolution proceedings will be conducted on an individual basis only and not in a class, consolidated, or representative action.</p>
+
+    <h3>EU/EEA Users</h3>
+    <p>If you are located in the European Union or EEA, you may also submit a complaint to your local data protection authority or the relevant supervisory authority in your member state.</p>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 15 -->
+  <div class="section" id="s15">
+    <div class="section-header">
+      <span class="section-num">15</span>
+      <h2>Changes to These Terms</h2>
+    </div>
+    <p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the "Last Updated" date at the top of this document and may provide additional notice (such as an in-app notification or update to our app store listing).</p>
+    <p>Your continued use of the App after any changes to these Terms constitutes your acceptance of the revised Terms. If you do not agree with the updated Terms, you must stop using the App and uninstall it from your devices.</p>
+    <div class="callout">
+      <strong>Tip:</strong> We recommend reviewing these Terms periodically. The current version is always available in the App's settings menu and on our app store listing page.
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- 16 -->
+  <div class="section" id="s16">
+    <div class="section-header">
+      <span class="section-num">16</span>
+      <h2>Contact Us</h2>
+    </div>
+    <p>If you have any questions, concerns, or requests regarding these Terms and Conditions, please reach out to us:</p>
+
+    <div class="contact-card">
+      <div class="contact-item">
+        <span class="contact-label">App Name</span>
+        <span class="contact-value">PlyxoHD</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">General Inquiries</span>
+        <span class="contact-value">support@plyxohd.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Legal / DMCA</span>
+        <span class="contact-value">legal@plyxohd.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Privacy Requests</span>
+        <span class="contact-value">plyxohd@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Platform</span>
+        <span class="contact-value">Android (Google Play Store)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-left">
+      <strong>PlyxoHD</strong> · © 2025 All rights reserved.
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+    document.getElementById('progress').style.width = (scrolled * 100) + '%';
+  });
+</script>
+
+</body>
+</html>

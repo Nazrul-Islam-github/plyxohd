@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlyxoHD – Privacy Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #0C0D10;
+      --surface:    #13151A;
+      --surface2:   #1A1D25;
+      --border:     #252830;
+      --border2:    #2E3240;
+      --accent:     #4F8EF7;
+      --accent2:    #7BB8FF;
+      --accent-glow:rgba(79,142,247,0.15);
+      --gold:       #E8B84B;
+      --text:       #E8EAF0;
+      --text-muted: #7A8099;
+      --text-dim:   #4A5068;
+      --red:        #F74F5A;
+      --green:      #3DD68C;
+      --green-glow: rgba(61,214,140,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth;  }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(79,142,247,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(232,184,75,0.05) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    /* ─── Header ─── */
+    header {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+    
+      margin-bottom: 36px;
+    }
+
+    .logo-icon {
+      width: 28px; height: 28px;
+      padding: 10px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 24px rgba(79,142,247,0.35);
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg { width: 26px; height: 26px; fill: #fff; }
+
+    .logo-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--text);
+      margin-left: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-name span { color: var(--accent); }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+
+    .header-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 6vw, 58px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    h1 em { font-style: italic; color: var(--accent2); }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .meta-item {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .meta-item strong { color: var(--text); font-weight: 500; }
+    .meta-dot { color: var(--border2); }
+
+    /* ─── Alert ─── */
+    .alert {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 56px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .alert strong { color: var(--text); font-weight: 500; }
+
+    /* ─── TOC ─── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 64px;
+    }
+
+    .toc-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 8px 32px;
+    }
+
+    .toc a {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex; align-items: baseline; gap: 10px;
+      transition: color 0.2s;
+      padding: 4px 0;
+    }
+
+    .toc a:hover { color: var(--accent2); }
+
+    .toc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    /* ─── Section ─── */
+    .section {
+      margin-bottom: 64px;
+      scroll-margin-top: 40px;
+    }
+
+    .section-header {
+      display: flex; align-items: flex-start; gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(79,142,247,0.25);
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-top: 6px;
+      flex-shrink: 0;
+      letter-spacing: 0.05em;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: 0.02em;
+      margin: 28px 0 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    h3::before {
+      content: '';
+      display: block;
+      width: 16px; height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    p {
+      font-size: 15px;
+      color: #A8B0C8;
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ─── Divider ─── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 0 64px;
+    }
+
+    /* ─── Lists ─── */
+    ul, ol {
+      margin: 12px 0 20px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    ul li, ol li {
+      position: relative;
+      padding: 7px 0 7px 28px;
+      font-size: 15px;
+      color: #A8B0C8;
+      font-weight: 300;
+      border-bottom: 1px solid var(--border);
+    }
+
+    ul li:last-child, ol li:last-child { border-bottom: none; }
+
+    ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 13px;
+      top: 8px;
+    }
+
+    ol { counter-reset: item; }
+    ol li { counter-increment: item; }
+    ol li::before {
+      content: counter(item, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      top: 10px;
+    }
+
+    /* ─── Callout ─── */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .callout.warn   { border-left: 3px solid var(--gold); background: rgba(232,184,75,0.04); }
+    .callout.danger { border-left: 3px solid var(--red);  background: rgba(247,79,90,0.04); }
+    .callout.info   { border-left: 3px solid var(--accent); background: rgba(79,142,247,0.04); }
+
+    .callout-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .callout.warn   .callout-label { color: var(--gold); }
+    .callout.danger .callout-label { color: var(--red); }
+    .callout.info   .callout-label { color: var(--accent); }
+    .callout strong { color: var(--text); font-weight: 500; }
+
+    /* ─── Table ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+
+    thead th {
+      background: var(--surface2);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+
+    tbody td { padding: 13px 18px; color: #A8B0C8; vertical-align: top; font-weight: 300; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    /* ─── SDK card ─── */
+    .sdk-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .sdk-header {
+      background: var(--surface2);
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .sdk-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .sdk-badge.crash { background: rgba(232,184,75,0.1); color: var(--gold);   border: 1px solid rgba(232,184,75,0.25); }
+    .sdk-badge.ads   { background: var(--accent-glow);   color: var(--accent); border: 1px solid rgba(79,142,247,0.25); }
+
+    .sdk-title { font-size: 14px; font-weight: 500; color: var(--text); }
+
+    .sdk-body ul { margin: 0; }
+    .sdk-body ul li { padding-left: 28px; }
+
+    /* ─── Permission grid ─── */
+    .perm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .perm-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .perm-card:hover {
+      border-color: rgba(79,142,247,0.4);
+      box-shadow: 0 0 16px rgba(79,142,247,0.07);
+    }
+
+    .perm-card-top {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .perm-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .perm-icon.blue  { background: var(--accent-glow);            border: 1px solid rgba(79,142,247,0.2); }
+    .perm-icon.green { background: var(--green-glow);             border: 1px solid rgba(61,214,140,0.2); }
+    .perm-icon.gold  { background: rgba(232,184,75,0.08);         border: 1px solid rgba(232,184,75,0.2); }
+
+    .perm-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent2);
+      letter-spacing: 0.03em;
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    .perm-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .perm-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    .perm-tag.required  { background: rgba(79,142,247,0.1);  color: var(--accent); border: 1px solid rgba(79,142,247,0.2); }
+    .perm-tag.optional  { background: var(--green-glow);     color: var(--green);  border: 1px solid rgba(61,214,140,0.2); }
+    .perm-tag.legacy    { background: rgba(232,184,75,0.08); color: var(--gold);   border: 1px solid rgba(232,184,75,0.2); }
+    .perm-tag.sensitive { background: rgba(247,79,90,0.07);  color: var(--red);    border: 1px solid rgba(247,79,90,0.2); }
+
+    /* ─── Rights grid ─── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 16px 0 24px;
+    }
+
+    .right-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .right-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 7px;
+    }
+
+    .right-card-title::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .right-card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* ─── Contact card ─── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .contact-item { display: flex; flex-direction: column; gap: 4px; }
+
+    .contact-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .contact-value { font-size: 14px; color: var(--accent2); font-weight: 400; }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-left { font-size: 13px; color: var(--text-dim); }
+    .footer-left strong { color: var(--text-muted); }
+    .footer-links { display: flex; gap: 24px; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent2); }
+
+    /* ─── Scroll progress ─── */
+    #progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      z-index: 100;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ─── Animations ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header   { animation: fadeUp 0.7s ease both; }
+    .alert   { animation: fadeUp 0.7s 0.1s ease both; }
+    .toc     { animation: fadeUp 0.7s 0.15s ease both; }
+    .section { animation: fadeUp 0.5s ease both; }
+
+    @media (max-width: 600px) {
+      .wrapper { padding: 0 16px 80px; }
+      header { padding: 48px 0 40px; }
+      .contact-card { padding: 20px; }
+      .toc { padding: 20px; }
+      h1 { letter-spacing: -0.5px; }
+      .perm-grid { grid-template-columns: 1fr; }
+      .rights-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div class="wrapper">
+
+  <!-- ─── HEADER ─── -->
+  <header>
+    <div class="logo-row">
+      
+       <img style="width: 100px" src="/asset/ic_launcher_foreground.webp" alt="logo">
+      <span class="logo-name">Plyx<span>o</span>HD</span>
+    </div>
+
+    <div class="header-badge">Legal Document · Privacy Policy</div>
+
+    <h1>Privacy <em>Policy</em></h1>
+
+    <div class="header-meta">
+      <span class="meta-item">Effective <strong>February 27, 2025</strong></span>
+      <span class="meta-dot">·</span>
+      <span class="meta-item">Last Updated <strong>February 27, 2025</strong></span>
+      <span class="meta-dot">·</span>
+      <span class="meta-item">Platform <strong>Android</strong></span>
+    </div>
+  </header>
+
+  <!-- ─── ALERT ─── -->
+  <div class="alert">
+    <strong>Please read this policy carefully before using PlyxoHD.</strong> This Privacy Policy explains how PlyxoHD ("we", "our", or "us") collects, uses, and shares information when you use our Android video player application. By using PlyxoHD, you agree to the terms described in this policy. If you do not agree, please discontinue use of the app immediately.
+  </div>
+
+  <!-- ─── TABLE OF CONTENTS ─── -->
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <div class="toc-grid">
+      <a href="#s1"><span class="toc-num">01</span> Information We Collect</a>
+      <a href="#s2"><span class="toc-num">02</span> How We Use Your Information</a>
+      <a href="#s3"><span class="toc-num">03</span> Advertising &amp; Google AdMob</a>
+      <a href="#s4"><span class="toc-num">04</span> Data Sharing &amp; Disclosure</a>
+      <a href="#s5"><span class="toc-num">05</span> App Permissions</a>
+      <a href="#s6"><span class="toc-num">06</span> GDPR – EEA &amp; UK Rights</a>
+      <a href="#s7"><span class="toc-num">07</span> CCPA / CPRA – California</a>
+      <a href="#s8"><span class="toc-num">08</span> CalOPPA</a>
+      <a href="#s9"><span class="toc-num">09</span> Children's Privacy (COPPA)</a>
+      <a href="#s10"><span class="toc-num">10</span> Data Security</a>
+      <a href="#s11"><span class="toc-num">11</span> Your Privacy Choices</a>
+      <a href="#s12"><span class="toc-num">12</span> Third-Party Services</a>
+      <a href="#s13"><span class="toc-num">13</span> Changes to This Policy</a>
+      <a href="#s14"><span class="toc-num">14</span> Contact Us</a>
+    </div>
+  </div>
+
+
+  <!-- ══ S1 ══ -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Information We Collect</h2>
+    </div>
+    <p>We collect information in the following ways:</p>
+
+    <h3>1.1 Information Collected Automatically</h3>
+    <ul>
+      <li>Device information: device model, OS version, unique device identifiers</li>
+      <li>App usage data: features used, playback events, app open/close events</li>
+      <li>Crash logs and diagnostics: stack traces, error reports, ANR logs</li>
+      <li>Advertising identifiers: Google Advertising ID (GAID) or Android ID</li>
+      <li>Network information: connection type (Wi-Fi, cellular), general IP-based location</li>
+    </ul>
+
+    <h3>1.2 Information from Third-Party SDKs</h3>
+    <p>We integrate the following third-party services that may collect data independently:</p>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <span class="sdk-badge crash">Crashlytics</span>
+        <span class="sdk-title">Google Firebase Crashlytics</span>
+      </div>
+      <div class="sdk-body">
+        <ul>
+          <li>Collects crash reports, device state at time of crash, OS version, and device model</li>
+          <li>Data is used solely for app stability analysis and bug fixing</li>
+          <li>Does not collect personally identifiable information (PII) unless you explicitly log custom keys</li>
+          <li>Privacy policy: https://firebase.google.com/support/privacy</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <span class="sdk-badge ads">AdMob</span>
+        <span class="sdk-title">Google AdMob</span>
+      </div>
+      <div class="sdk-body">
+        <ul>
+          <li>Displays personalized or non-personalized advertisements within the app</li>
+          <li>Collects advertising ID, device information, IP address, and interaction data with ads</li>
+          <li>May use cookies and similar technologies to serve interest-based ads</li>
+          <li>AdMob may share data with Google's advertising partners</li>
+          <li>Privacy policy: https://policies.google.com/privacy</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>1.3 Information You Provide</h3>
+    <p>PlyxoHD does not require account registration. We do not collect names, email addresses, passwords, or payment information directly.</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S2 ══ -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>How We Use Your Information</h2>
+    </div>
+    <p>We use the collected information for the following purposes:</p>
+    <ul>
+      <li>To operate and improve the PlyxoHD app</li>
+      <li>To diagnose and fix crashes, bugs, and performance issues via Crashlytics</li>
+      <li>To display advertisements through Google AdMob</li>
+      <li>To analyze usage trends and improve user experience</li>
+      <li>To comply with applicable legal obligations</li>
+      <li>To enforce our Terms of Service</li>
+    </ul>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S3 ══ -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Advertising &amp; Google AdMob</h2>
+    </div>
+    <p>PlyxoHD is provided free of charge and supported by advertising delivered through Google AdMob. AdMob may serve personalized ads based on your interests, or non-personalized ads if you have opted out.</p>
+    <p>You can opt out of personalized advertising by:</p>
+    <ul>
+      <li>Going to <strong>Settings → Google → Ads → Opt out of Ads Personalization</strong></li>
+      <li>Resetting your advertising ID via <strong>Settings → Google → Ads → Reset advertising ID</strong></li>
+    </ul>
+    <div class="callout info">
+      <span class="callout-label">Note</span>
+      Opting out does not mean you will no longer see ads. It means the ads you see may be less relevant to your interests.
+    </div>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S4 ══ -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Data Sharing &amp; Disclosure</h2>
+    </div>
+    <p>We do not sell your personal information. We may share data in the following circumstances:</p>
+    <ul>
+      <li>With Google (Firebase Crashlytics and AdMob) as described in Section 1.2</li>
+      <li>With law enforcement or government authorities when required by applicable law</li>
+      <li>In connection with a merger, acquisition, or sale of all or part of our assets, subject to standard confidentiality agreements</li>
+      <li>With service providers who assist us in operating the app under strict data processing agreements</li>
+    </ul>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S5 — PERMISSIONS ══ -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>App Permissions</h2>
+    </div>
+    <p>PlyxoHD requests the following Android permissions to deliver its core functionality. We only request permissions that are strictly necessary for the features described below.</p>
+
+    <div class="perm-grid">
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon blue">📳</div>
+          <span class="perm-name">VIBRATE</span>
+        </div>
+        <span class="perm-desc">Provides haptic feedback during user interactions such as gesture controls and UI confirmations inside the player.</span>
+        <span class="perm-tag required">Required</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon blue">⚙️</div>
+          <span class="perm-name">FOREGROUND_SERVICE</span>
+        </div>
+        <span class="perm-desc">Allows the app to run a foreground service so media playback can continue with a persistent notification visible to you.</span>
+        <span class="perm-tag required">Required</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon blue">▶️</div>
+          <span class="perm-name">FOREGROUND_SERVICE_MEDIA_PLAYBACK</span>
+        </div>
+        <span class="perm-desc">Declares the foreground service type as media playback, enabling proper system integration and media controls on Android 14+.</span>
+        <span class="perm-tag required">Required</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon blue">🌐</div>
+          <span class="perm-name">INTERNET</span>
+        </div>
+        <span class="perm-desc">Required to load advertisements via Google AdMob and to transmit crash reports to Firebase Crashlytics.</span>
+        <span class="perm-tag required">Required</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon blue">🔊</div>
+          <span class="perm-name">MODIFY_AUDIO_SETTINGS</span>
+        </div>
+        <span class="perm-desc">Enables volume control via swipe gestures and proper audio focus management so the app plays and pauses in harmony with other apps.</span>
+        <span class="perm-tag required">Required</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon green">🎬</div>
+          <span class="perm-name">READ_MEDIA_VIDEO</span>
+        </div>
+        <span class="perm-desc">Allows the app to read video files stored on your device for local playback. Required on Android 13 (API 33) and above.</span>
+        <span class="perm-tag sensitive">Media Access</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon green">🖼️</div>
+          <span class="perm-name">READ_MEDIA_IMAGES</span>
+        </div>
+        <span class="perm-desc">Allows reading image files used for video thumbnail generation and folder artwork display. Required on Android 13+.</span>
+        <span class="perm-tag sensitive">Media Access</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon green">📂</div>
+          <span class="perm-name">READ_MEDIA_VISUAL_USER_SELECTED</span>
+        </div>
+        <span class="perm-desc">Grants access only to specific media files you select via the photo picker — a privacy-preserving alternative introduced in Android 14+.</span>
+        <span class="perm-tag optional">Optional</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon gold">📁</div>
+          <span class="perm-name">READ_EXTERNAL_STORAGE</span>
+        </div>
+        <span class="perm-desc">Required on Android 12 (API 32) and below to browse and play video files from external storage. Not requested on Android 13+.</span>
+        <span class="perm-tag legacy">Legacy · max API 32</span>
+      </div>
+
+      <div class="perm-card">
+        <div class="perm-card-top">
+          <div class="perm-icon gold">💾</div>
+          <span class="perm-name">WRITE_EXTERNAL_STORAGE</span>
+        </div>
+        <span class="perm-desc">Used on Android 12 and below for saving subtitle files or playback preferences to external storage. Not requested on Android 13+.</span>
+        <span class="perm-tag legacy">Legacy · max API 32</span>
+      </div>
+
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-label">Your Control</span>
+      You can review and revoke any permission at any time via <strong>Android Settings → Apps → PlyxoHD → Permissions</strong>. Revoking a permission may limit certain app functionality.
+    </div>
+
+    <h3>What We Do NOT Access</h3>
+    <ul>
+      <li>We do not access your contacts, call logs, or SMS messages</li>
+      <li>We do not access your camera or microphone</li>
+      <li>We do not access your precise GPS or fine location</li>
+      <li>We do not access your accounts, passwords, or financial data</li>
+      <li>We do not upload your media files to any server — all playback is strictly local</li>
+    </ul>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S6 — GDPR ══ -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>GDPR — Rights for Users in the EEA &amp; UK</h2>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-label">GDPR / UK GDPR</span>
+      If you are located in the European Economic Area (EEA), the United Kingdom, or Switzerland, the following rights apply to you under the General Data Protection Regulation (GDPR) or UK GDPR.
+    </div>
+
+    <h3>6.1 Legal Basis for Processing</h3>
+    <ul>
+      <li><strong>Legitimate Interests:</strong> To improve app stability and performance (Crashlytics)</li>
+      <li><strong>Consent:</strong> For personalized advertising served by AdMob (consent obtained via in-app consent dialog)</li>
+      <li><strong>Legal Obligation:</strong> To comply with applicable laws</li>
+    </ul>
+
+    <h3>6.2 Your Rights Under GDPR</h3>
+    <div class="rights-grid">
+      <div class="right-card">
+        <div class="right-card-title">Right of Access</div>
+        <div class="right-card-desc">Request a copy of personal data we hold about you</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-title">Right to Rectification</div>
+        <div class="right-card-desc">Request correction of inaccurate personal data</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-title">Right to Erasure</div>
+        <div class="right-card-desc">Request deletion of your personal data ("Right to be Forgotten")</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-title">Restrict Processing</div>
+        <div class="right-card-desc">Request we limit how we use your data</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-title">Data Portability</div>
+        <div class="right-card-desc">Request your data in a machine-readable format</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-title">Right to Object</div>
+        <div class="right-card-desc">Object to processing based on legitimate interests</div>
+      </div>
+      <div class="right-card">
+        <div class="right-card-title">Withdraw Consent</div>
+        <div class="right-card-desc">Withdraw consent for personalized ads at any time</div>
+      </div>
+    </div>
+
+    <h3>6.3 Data Transfers</h3>
+    <p>Your data may be transferred to and processed in the United States or other countries. When such transfers occur, we rely on <strong>Standard Contractual Clauses (SCCs)</strong> approved by the European Commission or other lawful transfer mechanisms.</p>
+
+    <h3>6.4 Data Retention</h3>
+    <p>We retain crash data through Crashlytics for up to <strong>90 days</strong>. Ad-related data is managed by Google in accordance with their retention policies.</p>
+
+    <h3>6.5 How to Exercise GDPR Rights</h3>
+    <p>To exercise any of the above rights, please contact us at <strong>plyxohd@gmail.com</strong>. We will respond within <strong>30 days</strong> of receiving your request.</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S7 — CCPA ══ -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>CCPA / CPRA — Rights for California Residents</h2>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-label">CCPA · CPRA</span>
+      If you are a California resident, the California Consumer Privacy Act (CCPA) as amended by the California Privacy Rights Act (CPRA) provides you with specific privacy rights described in this section.
+    </div>
+
+    <h3>7.1 Categories of Personal Information We Collect</h3>
+    <p>In the past 12 months, we have collected the following categories of personal information as defined by the CCPA/CPRA:</p>
+    <ul>
+      <li><strong>Identifiers:</strong> Advertising ID, device ID, IP address</li>
+      <li><strong>Internet or Other Electronic Network Activity:</strong> App usage data, crash reports, ad interaction data</li>
+      <li><strong>Geolocation Data:</strong> Approximate location derived from IP address</li>
+      <li><strong>Inferences:</strong> Drawn from usage data to create a profile about app preferences</li>
+    </ul>
+
+    <h3>7.2 Purposes for Collection</h3>
+    <ul>
+      <li>Debugging, error correction, and app performance improvement</li>
+      <li>Displaying relevant advertisements</li>
+      <li>Auditing interactions with our service</li>
+      <li>Performing internal research and analytics</li>
+    </ul>
+
+    <h3>7.3 Sale or Sharing of Personal Information</h3>
+    <p>Under the CCPA/CPRA, "selling" includes sharing data for cross-context behavioral advertising. We may share your advertising ID and usage data with Google AdMob for targeted advertising, which may constitute a "sale" or "sharing" under California law.</p>
+    <p>You have the right to opt out. To do so:</p>
+    <ul>
+      <li>Visit our in-app privacy settings and select <strong>"Opt Out of Ad Personalization"</strong></li>
+      <li>Contact us at <strong>plyxohd@gmail.com</strong> with subject line <em>"California Opt-Out Request"</em></li>
+      <li>Use the Android Ads settings as described in Section 3</li>
+    </ul>
+
+    <h3>7.4 Your CCPA/CPRA Rights</h3>
+    <ul>
+      <li><strong>Know:</strong> Request disclosure of categories and specific pieces of personal information we collect, use, disclose, and sell</li>
+      <li><strong>Delete:</strong> Request deletion of your personal information, subject to certain exceptions</li>
+      <li><strong>Correct:</strong> Request correction of inaccurate personal information we hold</li>
+      <li><strong>Opt-Out of Sale/Sharing:</strong> Opt out of sale or sharing of your personal information for cross-context behavioral advertising</li>
+      <li><strong>Limit Use of Sensitive PI:</strong> Request we limit use of sensitive personal information to only what is necessary</li>
+      <li><strong>Non-Discrimination:</strong> You will not receive discriminatory treatment for exercising your CCPA/CPRA rights</li>
+    </ul>
+
+    <h3>7.5 Submitting a Request</h3>
+    <p>Contact us at <strong>plyxohd@gmail.com</strong>. We will respond within <strong>45 days</strong>. We may extend by an additional 45 days when reasonably necessary, with prior notice.</p>
+
+    <h3>7.6 Authorized Agents</h3>
+    <p>You may designate an authorized agent to submit requests on your behalf. We may require proof of authorization before processing such a request.</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S8 — CalOPPA ══ -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>CalOPPA — California Online Privacy Protection Act</h2>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-label">CalOPPA</span>
+      In accordance with the California Online Privacy Protection Act (CalOPPA), we make the following disclosures.
+    </div>
+
+    <ul>
+      <li>This privacy policy is accessible from our app's settings menu and app store listing</li>
+      <li>You can navigate to our privacy policy at any time without creating an account</li>
+      <li>We will notify users of material changes by updating the "Last Updated" date at the top of this policy</li>
+      <li>We honor Do Not Track (DNT) signals from browsers to the extent technically feasible; however, our third-party services (AdMob) may not respond to DNT signals</li>
+      <li>Third parties may collect personally identifiable information about your online activities over time and across apps when you use PlyxoHD</li>
+    </ul>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S9 — COPPA ══ -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>Children's Privacy (COPPA)</h2>
+    </div>
+    <p>PlyxoHD is not directed to children under the age of <strong>13</strong>. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13 without verified parental consent, we will take steps to delete such information immediately.</p>
+    <p>If you believe we have inadvertently collected information from a child under 13, please contact us at <strong>plyxohd@gmail.com</strong>.</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S10 — SECURITY ══ -->
+  <div class="section" id="s10">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>Data Security</h2>
+    </div>
+    <p>We implement industry-standard security measures to protect your data. However, no method of electronic transmission or storage is 100% secure. We cannot guarantee absolute security, but we strive to use commercially acceptable means to protect your personal information.</p>
+    <p>Firebase Crashlytics and Google AdMob maintain their own security measures consistent with Google's security standards. We encourage you to review their respective privacy policies.</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S11 — CHOICES ══ -->
+  <div class="section" id="s11">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>Your Privacy Choices</h2>
+    </div>
+
+    <h3>11.1 Advertising</h3>
+    <ul>
+      <li>Opt out of personalized ads via Android device settings (<strong>Settings → Google → Ads</strong>)</li>
+      <li>Reset your Advertising ID at any time in your device settings</li>
+    </ul>
+
+    <h3>11.2 Crashlytics</h3>
+    <p>You may contact us to request that crash reporting data associated with your device be deleted. Note that Crashlytics data is largely anonymized and not linked to identifiable users.</p>
+
+    <h3>11.3 App Permissions</h3>
+    <p>You may revoke any permission granted to PlyxoHD at any time via <strong>Settings → Apps → PlyxoHD → Permissions</strong>. See Section 5 for a full description of each permission.</p>
+
+    <h3>11.4 Uninstalling the App</h3>
+    <p>You may stop all data collection by uninstalling PlyxoHD using the standard uninstall processes available on your device.</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S12 — THIRD PARTY ══ -->
+  <div class="section" id="s12">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>Third-Party Services &amp; Links</h2>
+    </div>
+    <p>Our app may contain links or integrations with third-party services. This Privacy Policy does not apply to those third parties. We encourage you to review the privacy policies of any third-party services you interact with. We are not responsible for the data practices of third-party services.</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S13 — CHANGES ══ -->
+  <div class="section" id="s13">
+    <div class="section-header">
+      <span class="section-num">13</span>
+      <h2>Changes to This Privacy Policy</h2>
+    </div>
+    <p>We reserve the right to update this Privacy Policy at any time. Changes become effective when posted to our app listing or within the app. We will update the "Last Updated" date at the top of this policy whenever we make material changes. Your continued use of PlyxoHD after changes are posted constitutes your acceptance of the revised policy.</p>
+    <p>For significant changes, we may provide additional notice (such as an in-app notification).</p>
+  </div>
+  <div class="divider"></div>
+
+
+  <!-- ══ S14 — CONTACT ══ -->
+  <div class="section" id="s14">
+    <div class="section-header">
+      <span class="section-num">14</span>
+      <h2>Contact Us</h2>
+    </div>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us:</p>
+
+    <div class="contact-card">
+      <div class="contact-item">
+        <span class="contact-label">App Name</span>
+        <span class="contact-value">PlyxoHD</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">General Email</span>
+        <span class="contact-value">plyxohd@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">GDPR / CCPA Requests</span>
+        <span class="contact-value">plyxohd@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Platform</span>
+        <span class="contact-value">Android (Google Play Store)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-left">
+      <strong>PlyxoHD</strong> · © 2025 All rights reserved.
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+    document.getElementById('progress').style.width = (scrolled * 100) + '%';
+  });
+</script>
+
+</body>
+</html>
